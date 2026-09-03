@@ -1,26 +1,290 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* === Color Tokens === */
+  --bg-base: #09090b;
+  --bg-surface: #111113;
+  --bg-elevated: #18181b;
+  --border-subtle: #27272a;
+  --border-muted: #1e1e22;
+
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-dim: #3f3f46;
+
+  --accent: #818cf8;
+  --accent-glow: rgba(129, 140, 248, 0.12);
+  --accent-border: rgba(129, 140, 248, 0.25);
+  --accent-dim: rgba(129, 140, 248, 0.06);
+
+  /* === Typography === */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: "Sora", var(--font-inter), system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* === Base Reset & Defaults === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* === Selection === */
+::selection {
+  background: var(--accent-glow);
+  color: var(--text-primary);
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}
+
+/* === Focus Styles === */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === Utility Classes === */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* === Noise Texture Overlay === */
+.noise::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 128px;
+}
+
+/* === Grid Dot Pattern (Hero) === */
+.grid-pattern {
+  background-image:
+    radial-gradient(circle, var(--border-subtle) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* === Horizontal Rule Utility === */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: 0;
+}
+
+/* === Tag Style === */
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tag:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+/* === Animate on scroll base === */
+.animate-in {
+  animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Glow Pulse (accent dot) === */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.pulse-dot {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* === Card Hover States === */
+.card-hover {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.card-hover:hover {
+  border-color: var(--accent-border) !important;
+  background-color: var(--bg-elevated) !important;
+}
+
+.card-hover-surface {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.card-hover-surface:hover {
+  border-color: var(--accent-border) !important;
+  background-color: var(--bg-surface) !important;
+}
+
+/* === Step Card Hover === */
+.step-card {
+  transition: background-color 0.2s ease;
+}
+.step-card:hover {
+  background-color: var(--bg-surface) !important;
+}
+.step-card .step-line {
+  transition: width 0.3s ease;
+  width: 2rem;
+}
+.step-card:hover .step-line {
+  width: 4rem;
+}
+
+/* === Link Hover Colors === */
+.link-hover-accent:hover {
+  color: var(--accent) !important;
+}
+.link-hover-white:hover {
+  color: var(--text-primary) !important;
+}
+
+/* === Button / CTA === */
+.cta-primary {
+  background: var(--accent);
+  color: #09090b;
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+.cta-primary:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+.cta-outline {
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  background: transparent;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+.cta-outline:hover {
+  border-color: var(--accent-border);
+  transform: scale(1.02);
+}
+
+.cta-ghost {
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  background: var(--accent-dim);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.cta-ghost:hover {
+  background: var(--accent-glow);
+  transform: scale(1.02);
+}
+
+/* === Skill tag hover === */
+.skill-card-dot {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.card-hover:hover .skill-card-dot {
+  opacity: 1;
+}
+
+/* === Collab card === */
+.collab-card {
+  transition: border-color 0.2s ease;
+}
+.collab-card:hover {
+  border-color: var(--accent-border) !important;
+}
+
+/* === Mentorship card === */
+.mentor-card {
+  transition: border-color 0.2s ease;
+}
+.mentor-card:hover {
+  border-color: var(--accent-border) !important;
+}
+
