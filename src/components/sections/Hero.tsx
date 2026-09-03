@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { social } from "@/data/social";
 
 const socials = [
@@ -10,14 +10,14 @@ const socials = [
   { label: "CV", href: social.cv, external: false },
 ];
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: {
     transition: { staggerChildren: 0.1, delayChildren: 0.4 },
   },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
@@ -143,10 +143,10 @@ export default function Hero() {
           </span>
           <motion.div
             className="w-px h-10"
-            style={{ background: "linear-gradient(to bottom, var(--border-subtle), transparent)" }}
+            style={{ background: "linear-gradient(to bottom, var(--border-subtle), transparent)", transformOrigin: "top" }}
             initial={{ scaleY: 0 }}
             animate={{ scaleY: 1 }}
-            transition={{ delay: 1.6, duration: 0.6, transformOrigin: "top" }}
+            transition={{ delay: 1.6, duration: 0.6 }}
           />
         </motion.div>
       </div>
