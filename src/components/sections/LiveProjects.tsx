@@ -37,11 +37,11 @@ const liveProjects = [
     number: "03",
     category: "Digital Infrastructure",
     description:
-      "Technology company building digital infrastructure for Nigerian universities, businesses and federal agencies.",
+      "Co-founded digital infrastructure firm building software solutions for institutions and federal government agencies.",
     url: "https://basani.africa",
     preview: "/previews/basani.png",
-    tags: ["Digital Transformation", "Technology"],
-    role: "Technology / Software",
+    tags: ["Co-Founder", "Federal Govt", "Infrastructure"],
+    role: "Co-Founder & Developer",
     featured: false,
   },
   {

@@ -39,16 +39,16 @@ export const experiences: ExperienceItem[] = [
   {
     id: "basani",
     company: "Basani Digital Innovations Limited",
-    role: "Technology / Software",
-    period: "Previous",
-    type: "Contract",
+    role: "Co-Founder & Software Developer",
+    period: "2021 – Present",
+    type: "Founding",
     url: "https://basani.africa",
     description:
-      "Worked on digital transformation and technology implementation for institutional clients. Involved in requirements gathering, stakeholder collaboration and delivery of institutional technology projects.",
+      "Co-founded Basani Digital Innovations to build digital infrastructure and custom software solutions for organizations. Leading software architecture and technical implementation for institutional clients, including active digital transformation solutions with the Nigerian Federal Government.",
     highlights: [
-      "Digital transformation strategy and technology implementation",
-      "Requirements gathering and stakeholder collaboration",
-      "Institutional technology project delivery",
+      "Co-founded technology company developing digital systems and infrastructure for Nigerian institutions",
+      "Building and deploying institutional technology projects with the Federal Government of Nigeria (including NBRDA innovation initiatives)",
+      "Digital transformation strategy, stakeholder collaboration, and technical system architecture",
     ],
   },
   {
